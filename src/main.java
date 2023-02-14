@@ -1,3 +1,6 @@
+import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import models.Produto;
 
@@ -15,7 +18,7 @@ public class main {
             process(option);
         }while(option!=0);
     }
-    public static void process(int option){
+    public static void process(int option) throws Exception{
 
         switch(option){
             case 1:{
@@ -27,11 +30,22 @@ public class main {
                 System.out.println("qual o id deseja dar ao novo produto?");
                 int id =scanner.nextInt();
 
-                Produto novoProduto = new Produto(id,descricao);
+                System.out.println("Qual o preço: ");
+                double preco = scanner.nextDouble();
+
+                System.out.println("Qual a data de validade:");
+                String dataString =scanner.next();
+
+                Date dataValidade = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
+
+                Produto novoProduto = new Produto(id,descricao, preco, dataValidade);
 
                 System.out.println("Produto criado com sucesso");
                 System.out.println("---ID "+novoProduto.getId());
-                System.out.println("---Descricao: " +novoProduto.getDescricao);
+                System.out.println("---Descricao: " +novoProduto.getDescricao());
+                System.out.println("---Preço: " +novoProduto.getPreco());
+                System.out.println("---Data de Validade: " +novoProduto.getDataValidade());
+                System.out.println("---------------------------------------");
 
             }
         }
