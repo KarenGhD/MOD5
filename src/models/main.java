@@ -1,38 +1,56 @@
-package models;
-
+import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
-public class Produto {
-    private int id;
-    private String descricao;
-    private double preco;
-    private Date dataValidade;
+import db.ProdutosDb;
+import models.Produto;
 
-    public Produto(int id, String descricao,double preco, Date dataValidade){
-        this.id =id;
-        this.descricao =descricao;
-        this.preco=preco;
-        this.dataValidade=dataValidade;
-    }
-    public void setId(int id){
-        this.id=id;
-    }
+public class main {
+    static ProdutosDb produtosDb = new ProdutosDb();
+    public static void main (String[] args) throws Exception{
+        System.out.println("-------PEDIDO DE VENDAS----");
+        int option;
+        do{
+            System.out.println("1- Solicitar produto");
+            System.out.println("0- sair");
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Qual operação deseja realizar?");
+            option = scanner.nextInt();
 
-    public void setDescricao(String descricao){
-        this.descricao=descricao;
+            process(option);
+        }while(option!=0);
     }
-    public int getId(){
-        return id;
-    }
-    public String getDescricao(){
-        return descricao;
-    }
+    public static void process(int option) throws Exception{
 
-    public double getPreco(){
-        return preco;
-    }
+        switch(option){
+            case 1:{
+                Scanner scanner = new Scanner(System.in);
 
-    public Date getDataValidade() {
-        return dataValidade;
+                System.out.println("qual a descrição deseja dar ao produto?");
+                String descricao = scanner.nextLine();
+
+                System.out.println("qual o id deseja dar ao novo produto?");
+                int id =scanner.nextInt();
+
+                System.out.println("Qual o preço: ");
+                double preco = scanner.nextDouble();
+
+                System.out.println("Qual a data de validade:");
+                String dataString =scanner.next();
+
+                Date dataValidade = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
+
+                Produto novoProduto = new Produto(id,descricao, preco, dataValidade);
+
+                System.out.println("Produto criado com sucesso");
+                System.out.println("---ID "+novoProduto.getId());
+                System.out.println("---Descricao: " +novoProduto.getDescricao());
+                System.out.println("---Preço: " +novoProduto.getPreco());
+                System.out.println("---Data de Validade: " +novoProduto.getDataValidade());
+                System.out.println("---------------------------------------");
+
+            }
+        }
     }
 }
