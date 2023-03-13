@@ -1,21 +1,22 @@
 package school;
 import java.util.List;
+import java.util.Date;
 
 public class Class {
-    private String day;
+    private Date dateCall;
     private List<Student> students;
 
-    public Class(String day, List<Student> students){
-        this.day = day;
+    public Class(Date dateCall, List<Student> students){
+        this.dateCall = dateCall;
         this.students = students;
     }
 
-    public String getDay(){
-        return day;
+    public Date getDateCall(){
+        return dateCall;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setDateCall(Date dateCall) {
+        this.dateCall = dateCall;
     }
 
     public List<Student> getStudents() {

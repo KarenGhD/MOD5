@@ -19,9 +19,11 @@ public class Produto {
     }
 
     public void setDescricao(String descricao){
+
         this.descricao=descricao;
     }
     public int getId(){
+
         return id;
     }
     public String getDescricao(){
