@@ -12,6 +12,6 @@ public class ProdutosDb {
         return produtoList;
     }
     public void addNovoProduto(Produto produto){
-        produtoList.add();
+        produtoList.add(produto);
     }
 }

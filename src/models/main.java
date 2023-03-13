@@ -1,6 +1,7 @@
 import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import db.ProdutosDb;
@@ -13,6 +14,7 @@ public class main {
         int option;
         do{
             System.out.println("1- Solicitar produto");
+            System.out.println("2- Listar produtos cadastrados");
             System.out.println("0- sair");
             Scanner scanner = new Scanner(System.in);
             System.out.println("Qual operação deseja realizar?");
@@ -42,14 +44,24 @@ public class main {
                 Date dataValidade = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
 
                 Produto novoProduto = new Produto(id,descricao, preco, dataValidade);
+                produtosDb.addNovoProduto(novoProduto);
 
-                System.out.println("Produto criado com sucesso");
-                System.out.println("---ID "+novoProduto.getId());
-                System.out.println("---Descricao: " +novoProduto.getDescricao());
-                System.out.println("---Preço: " +novoProduto.getPreco());
-                System.out.println("---Data de Validade: " +novoProduto.getDataValidade());
-                System.out.println("---------------------------------------");
 
+                break;
+
+            }
+            case 2:{
+                List<Produto> listaDeProdutos = produtosDb.getProdutoList();
+
+                for(Produto produto : listaDeProdutos){
+
+                    System.out.println("---ID "+produto.getId());
+                    System.out.println("---Descricao: " +produto.getDescricao());
+                    System.out.println("---Preço: " +produto.getPreco());
+                    System.out.println("---Data de Validade: " +produto.getDataValidade());
+                    System.out.println("---------------------------------------");
+                }
+                break;
             }
         }
     }
